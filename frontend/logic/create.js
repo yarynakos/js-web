@@ -14,9 +14,9 @@ async function createFridge() {
     let image = document.querySelector('#imgField').value;
     let name = document.querySelector('#nameField').value;
     let price = parseInt(document.querySelector('#priceField').value);
-    console.log(typeof(price));
+    console.log(typeof (price));
     if (image && name && price >= 1) {
-        fetch('https://632032139f82827dcf26f6c9.mockapi.io/backend/cars/carPark', {
+        fetch('http://localhost:8080/fridges', {
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -28,6 +28,7 @@ async function createFridge() {
             })
         })
             .then(res => {
+                console.log(res)
                 if (res.ok) {
                     image = '';
                     name = '';
@@ -36,8 +37,9 @@ async function createFridge() {
                 }
             })
             .catch(() => {
-                document.querySelector('.alert').textContent = 'Form is invalid, check your info';
                 showAlert();
             });
+    } else {
+        showAlert();
     }
 }

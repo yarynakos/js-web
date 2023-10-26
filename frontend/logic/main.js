@@ -36,7 +36,7 @@ function createFridgeElem(arr) {
 } 
 // створює плитку яка витягує дані з сервачка
 async function getFridge() {
-    fetch('https://632032139f82827dcf26f6c9.mockapi.io/backend/cars/carPark')
+    fetch('http://localhost:8080/fridges')
         .then(res => res.json())
         .then(data => {
             fridges = data;
@@ -121,7 +121,7 @@ function getTotalPrice(arr) {
 }
 
 async function deleteFridge(id, index) {
-    fetch(`https://632032139f82827dcf26f6c9.mockapi.io/backend/cars/carPark/${id}`,{
+    fetch(`http://localhost:8080/fridges/${id}`,{
         method: 'DELETE'
     })  
     .then(res => {
