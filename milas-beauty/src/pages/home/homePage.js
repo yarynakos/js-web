@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./homePage.css";
 import background from "../../assets/images/homePage/elements_desktop_1441-2.png";
 import Content from "../../components/item/Content";
-import ContentSection from "./ContentSection"; // Імпортуємо нову компоненту
+import ContentSection from "./ContentSection";
 import { getData } from "./data";
 
 function HomePage() {
