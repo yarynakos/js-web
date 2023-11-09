@@ -16,7 +16,7 @@ function hideAlert() {
 }
 
 async function getFridge(id) {
-    fetch(`https://632032139f82827dcf26f6c9.mockapi.io/backend/cars/carPark/${id}`)
+    fetch(`http://localhost:8080/fridges/${id}`)
         .then(res => res.json())
         .then(data => {
             console.log(data);
@@ -32,7 +32,7 @@ async function getFridge(id) {
 
 async function updateFridge() {
     if (fridgeName.value && fridgePrice.value && fridgeImage.value && fridgePrice.value >= 1) {
-        fetch(`https://632032139f82827dcf26f6c9.mockapi.io/backend/cars/carPark/${fridgeId}`, {
+        fetch(`http://localhost:8080/fridges/${fridgeId}`, {
             method: 'PUT',
             headers: {
                 'Content-type': 'application/json'
@@ -44,6 +44,7 @@ async function updateFridge() {
             })
         })
             .then(res => {
+                console.log(res)
                 if (res.ok) {
                     fridgeName.value = '';
                     fridgePrice.value = '';
@@ -55,9 +56,10 @@ async function updateFridge() {
                 }
             })
             .catch(() => {
-                document.querySelector('.alert').textContent = 'Form is invalid, check your info';
                 showAlert();
             })
+    } else {
+        showAlert();
     }
 }
 
