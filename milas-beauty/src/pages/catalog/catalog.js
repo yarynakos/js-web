@@ -1,16 +1,18 @@
 import React, {useEffect, useState} from "react";
 import Content from "../../components/item/Content";
-import "./catalog.css"
-import {getData} from "../home/data";
-import axios from "axios";
+import "./catalog.css";
 import Loader from "../../components/loader/loader";
+import {getItems} from "./api";
 
 function Catalog() {
     const [items, setItems] = useState([]);
     const [request, setRequest] = useState('');
     const [isCheckedPrice, setIsCheckedPrice] = useState(false);
+    const [isCheckedName, setIsCheckedName] = useState(false);
     useEffect(() => {
-        axios.get("http://localhost:8080/items").then(res => setItems(res.data));
+        getItems().then((res) => {
+            setItems(res);
+        })
     }, []);
     const [loading, setLoading] = useState(true);
     setTimeout(() => {
@@ -18,13 +20,36 @@ function Catalog() {
     }, 1500)
 
     const sortByPrice = (arr) => {
+        setIsCheckedName(false)
         setIsCheckedPrice(!isCheckedPrice)
-        if (!isCheckedPrice) {
+        if (isCheckedPrice) {
             return arr.sort((a, b) => {
                 return b.price - a.price;
             });
         } else {
-            axios.get("http://localhost:8080/items").then(res => setItems(res.data));
+            getItems().then((res) => {
+                setItems(res)
+            })
+        }
+    };
+
+    const sortByName = (arr) => {
+        setIsCheckedPrice(false)
+        setIsCheckedName(!isCheckedName)
+        if (isCheckedName) {
+            return arr.sort((a, b) => {
+                if (a.name.toUpperCase() > b.name.toUpperCase()) {
+                    return 1;
+                } else if (a.name.toUpperCase() < b.name.toUpperCase()) {
+                    return -1;
+                } else {
+                    return 0;
+                }
+            });
+        } else {
+            getItems().then((res) => {
+                setItems(res);
+            })
         }
     };
     return (
@@ -41,6 +66,9 @@ function Catalog() {
                                     <input type="checkbox" checked={isCheckedPrice} onClick={() => sortByPrice(items)}
                                            id="byPrice"/>
                                     <label htmlFor="byPrice">BY PRICE</label>
+                                    <input type="checkbox" checked={isCheckedName} onClick={() => sortByName(items)}
+                                           id="byName"/>
+                                    <label htmlFor="byName">BY NAME</label>
                                 </div>
                             </div>
                             <div className="searchSec">

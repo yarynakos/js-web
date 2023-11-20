@@ -1,16 +1,16 @@
 import React, {useEffect, useState} from "react";
 import "./detailProductPage.css"
 import {Link, useParams} from "react-router-dom";
-import axios from "axios";
 import Loader from "../../components/loader/loader";
+import {getItemById} from "../catalog/api";
 
 function DetailProductPage() {
     const {id} = useParams();
     const [item, setItem] = useState({id: 1, image: "", name: "Not found", price: 0});
     useEffect(() => {
-        axios.get(`http://localhost:8080/items/${id}`).then(res => {
-            setItem(res.data);
-        });
+        getItemById(id).then((res) => {
+            setItem(res);
+        })
     }, [id]);
     const [loading, setLoading] = useState(true);
     setTimeout(() => {

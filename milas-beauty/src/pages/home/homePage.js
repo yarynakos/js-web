@@ -2,13 +2,15 @@ import React, {useEffect, useState} from "react";
 import "./homePage.css";
 import background from "../../assets/images/homePage/elements_desktop_1441-2.png";
 import ContentSection from "./ContentSection";
-import axios from "axios";
 import Loader from "../../components/loader/loader";
+import {getItems} from "../catalog/api";
 
 function HomePage() {
     const [headers, setHeaders] = useState([]);
     useEffect(() => {
-        axios.get("http://localhost:8080/items").then(res => setHeaders(res.data));
+        getItems().then((res) => {
+            setHeaders(res);
+        })
     }, []);
     const [viewMore, setViewMore] = useState(false);
     const [loading, setLoading] = useState(true);
