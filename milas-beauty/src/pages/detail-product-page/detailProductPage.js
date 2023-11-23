@@ -3,8 +3,13 @@ import "./detailProductPage.css"
 import {Link, useParams} from "react-router-dom";
 import Loader from "../../components/loader/loader";
 import {getItemById} from "../catalog/api";
+import {useDispatch} from "react-redux";
+import {addToCart} from "../store/itemSlice";
+
 
 function DetailProductPage() {
+    const dispatch = useDispatch();
+    const handle = (id, image, name, price) => dispatch(addToCart({id, image, name, price, amount : 1}))
     const {id} = useParams();
     const [item, setItem] = useState({id: 1, image: "", name: "Not found", price: 0});
     useEffect(() => {
@@ -32,7 +37,7 @@ function DetailProductPage() {
                             <div className="price">
                                 <p>{item.price}$</p>
                             </div>
-                            <button className="buyBtn">Buy</button>
+                            <button className="buyBtn" onClick={() => handle(item.id, item.image, item.name, item.price)}>Buy</button>
                         </div>
                     </main>
             }

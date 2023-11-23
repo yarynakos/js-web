@@ -22,7 +22,7 @@ function Catalog() {
     const sortByPrice = (arr) => {
         setIsCheckedName(false)
         setIsCheckedPrice(!isCheckedPrice)
-        if (isCheckedPrice) {
+        if (!isCheckedPrice) {
             return arr.sort((a, b) => {
                 return b.price - a.price;
             });
@@ -36,7 +36,7 @@ function Catalog() {
     const sortByName = (arr) => {
         setIsCheckedPrice(false)
         setIsCheckedName(!isCheckedName)
-        if (isCheckedName) {
+        if (!isCheckedName) {
             return arr.sort((a, b) => {
                 if (a.name.toUpperCase() > b.name.toUpperCase()) {
                     return 1;
