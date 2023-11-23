@@ -1,43 +1,43 @@
 package com.fridge.freezer.controllers;
 
-import com.fridge.freezer.models.Fridge;
-import com.fridge.freezer.services.FridgeService;
+import com.fridge.freezer.models.Beauty;
+import com.fridge.freezer.services.BeautyService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/fridges")
-public class FridgeController {
-    private final FridgeService fridgeService;
+@RequestMapping("/items")
+public class BeautyController {
+    private final BeautyService beautyService;
 
-    public FridgeController(FridgeService fridgeService) {
-        this.fridgeService = fridgeService;
+    public BeautyController(BeautyService beautyService) {
+        this.beautyService = beautyService;
     }
 
     @GetMapping
-    private List<Fridge> getAll() {
-        return this.fridgeService.findAll();
+    private List<Beauty> getAll() {
+        return this.beautyService.findAll();
     }
 
     @GetMapping("/{id}")
-    private Fridge getById(@PathVariable Integer id) {
-        return this.fridgeService.findById(id);
+    private Beauty getById(@PathVariable Integer id) {
+        return this.beautyService.findById(id);
     }
 
     @PostMapping
-    private Fridge create(@RequestBody Fridge fridge) {
-        return this.fridgeService.create(fridge);
+    private Beauty create(@RequestBody Beauty beauty) {
+        return this.beautyService.create(beauty);
     }
 
     @PutMapping("/{id}")
-    private Fridge update(@PathVariable Integer id, @RequestBody Fridge fridge) {
-        return this.fridgeService.update(id, fridge);
+    private Beauty update(@PathVariable Integer id, @RequestBody Beauty beauty) {
+        return this.beautyService.update(id, beauty);
     }
 
     @DeleteMapping("/{id}")
     private void delete(@PathVariable Integer id) {
-        this.fridgeService.delete(id);
+        this.beautyService.delete(id);
     }
 }

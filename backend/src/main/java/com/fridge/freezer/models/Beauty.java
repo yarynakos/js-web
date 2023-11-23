@@ -14,7 +14,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class Fridge {
+public class Beauty {
     @Id
     @GeneratedValue
     private Integer id;

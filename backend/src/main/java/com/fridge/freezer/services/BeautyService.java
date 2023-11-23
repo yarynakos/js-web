@@ -1,7 +1,7 @@
 package com.fridge.freezer.services;
 
-import com.fridge.freezer.models.Fridge;
-import com.fridge.freezer.repositories.FridgeRepository;
+import com.fridge.freezer.models.Beauty;
+import com.fridge.freezer.repositories.BeautyRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -9,34 +9,34 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 
 @Service
-public class FridgeService {
-    private final FridgeRepository fridgeRepository;
+public class BeautyService {
+    private final BeautyRepository beautyRepository;
 
-    public FridgeService (FridgeRepository fridgeRepository) {
-        this.fridgeRepository = fridgeRepository;
+    public BeautyService(BeautyRepository beautyRepository) {
+        this.beautyRepository = beautyRepository;
     }
 
-    public List<Fridge> findAll() {
-        return this.fridgeRepository.findAll();
+    public List<Beauty> findAll() {
+        return this.beautyRepository.findAll();
     }
 
-    public Fridge findById(Integer id) {
-        return this.fridgeRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+    public Beauty findById(Integer id) {
+        return this.beautyRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
-    public Fridge create(Fridge fridge) {
-        return this.fridgeRepository.save(fridge);
+    public Beauty create(Beauty beauty) {
+        return this.beautyRepository.save(beauty);
     }
 
-    public Fridge update(Integer id, Fridge fridge) {
-        Fridge updatedFridge = this.fridgeRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        updatedFridge.setImage(fridge.getImage());
-        updatedFridge.setName(fridge.getName());
-        updatedFridge.setPrice(fridge.getPrice());
-        return this.fridgeRepository.save(updatedFridge);
+    public Beauty update(Integer id, Beauty beauty) {
+        Beauty updatedBeauty = this.beautyRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        updatedBeauty.setImage(beauty.getImage());
+        updatedBeauty.setName(beauty.getName());
+        updatedBeauty.setPrice(beauty.getPrice());
+        return this.beautyRepository.save(updatedBeauty);
     }
 
     public void delete(Integer id) {
-        this.fridgeRepository.deleteById(id);
+        this.beautyRepository.deleteById(id);
     }
 }
