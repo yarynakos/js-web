@@ -8,7 +8,7 @@
 		<version>3.1.4</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.fridge</groupId>
+	<groupId>com.beauty</groupId>
 	<artifactId>freezer</artifactId>
 	<version>1.0.0</version>
 	<name>freezer</name>
