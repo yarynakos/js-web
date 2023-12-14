@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 
 import "./cart.css"
 import {addToCart, removeFromCart} from "../store/itemSlice";
+import {Link} from "react-router-dom";
 
 function Cart() {
     const cart = useSelector(state => state.cart);
@@ -25,7 +26,12 @@ function Cart() {
         }
         let itemsList = itemObjectList.map((item) => {
             return (<div className='block' key={itemObjectList.indexOf(item)}>
-                <img src={item.image} alt=""/>
+                <div className='photo'>
+                    <h2>{item.name}</h2>
+                    <Link to={(`/catalog/${item.id}`)}>
+                    <img src={item.image} alt=""/>
+                </Link>
+                </div>
                 <button onClick={() => {
                     handleIncreaseAmount(item)
                 }}>+

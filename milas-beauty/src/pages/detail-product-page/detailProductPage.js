@@ -9,7 +9,7 @@ import {addToCart} from "../store/itemSlice";
 
 function DetailProductPage() {
     const dispatch = useDispatch();
-    const handle = (id, image, name, price) => dispatch(addToCart({id, image, name, price, amount : 1}))
+    const handle = (id, image, name, price) => dispatch(addToCart({id, image, name, price, amount : itemCount}))
     const {id} = useParams();
     const [item, setItem] = useState({id: 1, image: "", name: "Not found", price: 0});
     useEffect(() => {
@@ -18,6 +18,7 @@ function DetailProductPage() {
         })
     }, [id]);
     const [loading, setLoading] = useState(true);
+    const [itemCount, setItemCount] = useState(1);
     setTimeout(() => {
         setLoading(false);
     }, 1000)
@@ -37,6 +38,14 @@ function DetailProductPage() {
                             <div className="price">
                                 <p>{item.price}$</p>
                             </div>
+                            <input type="number" id="count" placeholder="Type count" min = "1"
+                                   onChange={(event) => {
+                                       if (event.target.value > 0 ) {
+                                           setItemCount(event.target.value)
+                                       } else {
+                                           event.target.value = 1
+                                       }
+                                   }}/>
                             <button className="buyBtn" onClick={() => handle(item.id, item.image, item.name, item.price)}>Buy</button>
                         </div>
                     </main>
